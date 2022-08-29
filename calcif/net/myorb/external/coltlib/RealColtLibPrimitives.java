@@ -1,7 +1,7 @@
 
 package net.myorb.external.coltlib;
 
-import cern.jet.math.*;
+import cern.jet.math.Bessel;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * real number interface layer to access methods of Colt library
  * @author Michael Druckman
  */
-public class RealColtLibPrimitives extends ColtLibPrimitives<Double>
+public class RealColtLibPrimitives extends ColtLibPrimitives <Double>
 {
 
 	/*
