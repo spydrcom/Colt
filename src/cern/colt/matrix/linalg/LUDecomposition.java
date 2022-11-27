@@ -41,6 +41,8 @@ Returns the determinant, <tt>det(A)</tt>.
 public double det() {
 	return quick.det();
 }
+public double getDetP () { return quick.getDetP (); }
+
 /** 
 Returns pivot permutation vector as a one-dimensional double array
 @return     (double) piv

@@ -144,6 +144,21 @@ public class Linalg
 		return lastReport.getLud ().getU ().toArray ();
 	}
 
+	public static int [] getLudP ()
+	{
+		return lastReport.lud.getPivot ();
+	}
+
+	public static double getLudPdet ()
+	{
+		return lastReport.getLud().getDetP();
+	}
+
+	public static double getDet ()
+	{
+		return lastReport.getLud().det ();
+	}
+
 	public static double[][] getLudSolution (double[][] m)
 	{
 		DoubleMatrix2D m2d =

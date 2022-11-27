@@ -230,6 +230,7 @@ public double det() {
 	}
 	return det;
 }
+public double getDetP () { return pivsign; }
 /** 
 Returns pivot permutation vector as a one-dimensional double array
 @return     (double) piv
