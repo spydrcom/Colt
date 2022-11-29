@@ -19,9 +19,14 @@ public class Linalg
 	 */
 	public static String report (double[][] m)
 	{
+		return new Algebra ().toVerboseString (prep (m));
+	}
+	public static DoubleMatrix2D prep (double[][] m)
+	{
 		DoubleMatrix2D m2d;
 		load (m2d = DoubleFactory2D.dense.make (m));
-		return new Algebra ().toVerboseString (m2d);
+		//System.out.println ("LOADED");
+		return m2d;
 	}
 	public static void load (double[][] m)
 	{
@@ -57,6 +62,20 @@ public class Linalg
 		return lastReport.getSvd ().getU ().toArray ();
 	}
 
+	public static double getSvdNorm ()
+	{
+		return lastReport.getSvd ().cond ();
+	}
+
+	public static double getSvdNorm2 ()
+	{
+		return lastReport.getSvd ().norm2 ();
+	}
+
+	public static int getSvdRank ()
+	{
+		return lastReport.getSvd ().rank ();
+	}
 
 	/*
 	 * Eigenvalue Decomposition functionality
@@ -168,6 +187,32 @@ public class Linalg
 	public static double[][] solveWithLUD (double[][] A, double[][] b)
 	{ load (A); return getLudSolution (b); }
 
+	public static CholeskyDecomposition getCHD ()
+	{
+		return lastReport.getChd ();
+	}
+
+	public static double[][] getChdL ()
+	{
+		return lastReport.getChd ().getL ().toArray ();
+	}
+
+	public static double[][] getCholeskySolution (double[] b)
+	{
+		double [][] B = new double [b.length][1];
+		for (int i=0; i<b.length; i++) B[i][0] = b[i];
+		return lastReport.getChd ().solve
+		(
+			DoubleFactory2D.dense.make (B)
+		).toArray ();
+	}
+	public static double[][] getCholeskySolution (double[][] B)
+	{
+		return lastReport.getChd ().solve
+		(
+			DoubleFactory2D.dense.make (B)
+		).toArray ();
+	}
 
 }
 
@@ -215,5 +260,13 @@ class LinAlgReports
 		return lud;
 	}
 	LUDecomposition lud = null;
+
+	CholeskyDecomposition getChd ()
+	{
+		if (chd == null)
+			chd = new CholeskyDecomposition (m2d);
+		return chd;
+	}
+	CholeskyDecomposition chd = null;
 
 }
