@@ -47,7 +47,7 @@ public double getDetP () { return quick.getDetP (); }
 Returns pivot permutation vector as a one-dimensional double array
 @return     (double) piv
 */
-private double[] getDoublePivot() {
+public double[] getDoublePivot() {
 	return quick.getDoublePivot();
 }
 /** 

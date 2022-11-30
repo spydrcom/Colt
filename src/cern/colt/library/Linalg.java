@@ -1,8 +1,8 @@
 
 package cern.colt.library;
 
-import cern.colt.matrix.*;
 import cern.colt.matrix.linalg.*;
+import cern.colt.matrix.*;
 
 /**
  * interface to Colt library for Linear Algebra classes
@@ -76,6 +76,7 @@ public class Linalg
 	{
 		return lastReport.getSvd ().rank ();
 	}
+
 
 	/*
 	 * Eigenvalue Decomposition functionality
@@ -163,9 +164,18 @@ public class Linalg
 		return lastReport.getLud ().getU ().toArray ();
 	}
 
-	public static int [] getLudP ()
+	public static int [] getLudIntP ()
 	{
-		return lastReport.lud.getPivot ();
+		return lastReport.getLud().getPivot ();
+	}
+
+	public static double [] getLudP ()
+	{
+		int p [] = lastReport.getLud ().getPivot ();
+		double P [] = new double [p.length];
+		for (int i=p.length-1; i>=0; i--)
+		{ P[i] = p[i]; }
+		return P;
 	}
 
 	public static double getLudPdet ()
@@ -187,10 +197,13 @@ public class Linalg
 	public static double[][] solveWithLUD (double[][] A, double[][] b)
 	{ load (A); return getLudSolution (b); }
 
+
+	/*
+	 * Cholesky
+	 */
+
 	public static CholeskyDecomposition getCHD ()
-	{
-		return lastReport.getChd ();
-	}
+	{ return lastReport.getChd (); }
 
 	/**
 	 * @return the Colt L matrix or C in other documentation
@@ -210,6 +223,7 @@ public class Linalg
 			DoubleFactory2D.dense.make (B)
 		).toArray ();
 	}
+
 	public static double[][] getCholeskySolution (double[][] B)
 	{
 		return lastReport.getChd ().solve
@@ -218,7 +232,9 @@ public class Linalg
 		).toArray ();
 	}
 
+
 }
+
 
 /**
  * wrapper / place-holder for the currently analyzed matrix and
