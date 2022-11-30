@@ -192,8 +192,12 @@ public class Linalg
 		return lastReport.getChd ();
 	}
 
-	public static double[][] getChdL ()
+	/**
+	 * @return the Colt L matrix or C in other documentation
+	 */
+	public static double[][] getChd ()
 	{
+		// Colt calls the matrix L but bigger view is the C version
 		return lastReport.getChd ().getL ().toArray ();
 	}
 
