@@ -214,6 +214,11 @@ public class Linalg
 		return lastReport.getChd ().getL ().toArray ();
 	}
 
+	public static boolean getChdTestResult ()
+	{
+		return lastReport.getChd ().isSymmetricPositiveDefinite ();
+	}
+
 	public static double[][] getCholeskySolution (double[] b)
 	{
 		double [][] B = new double [b.length][1];
